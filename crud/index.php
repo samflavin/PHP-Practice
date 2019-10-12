@@ -2,11 +2,18 @@
 
 <?php include 'db.php';
 
-$sql = "select * from tasks";
+$page = (isset($GET['page']) ? $GET['page'] : 1);
+$perPage = (isset($GET['per-page']) && ($GET['per-page']) <= 50 ? $GET['per-page'] : 5 );
+$start = ($page > 1 ) ? ($page * $perPage) - $perPage : 0;
+
+$sql = "select * from tasks limit ".$start.", ".$perPage." ";
+$total = $db->query("select * from tasks")->num_rows;
 
 $rows=$db->query($sql);
 
 ?>
+
+
 <html lang="en">
 <head>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
