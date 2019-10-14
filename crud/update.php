@@ -8,7 +8,18 @@ $sql = "select * from tasks where id = '$id' " ;
 
 $rows=$db->query($sql);
 
-$row= $row
+$row= $rows->fetch_assoc();
+if(isset($_POST['send'])){
+
+  $task = $_POST['task'];
+
+  $sql2 = "update tasks set name='$task' where id = '$id' ";
+
+  $db->query($sql2);
+
+  header('location: index.php');
+
+}
 
 ?>
 <html lang="en">
@@ -31,16 +42,13 @@ $row= $row
 
 <div class="row" style="margin-top: 70px;">
         <div class="col-md-10 col-md-offset-1">
-        <button type="button" data-target="#myModal" data-toggle="modal" class="btn btn-success">Update Task</button>
-        <button type="button" class="btn btn-default" text="right">Print</button>
-        <hr><br>
 
-        <form method="post" action="add.php" >
+        <form method="post" >
             <div class="form-group">
             <label>Task Name</label>
-            <input type="text" required name="task" class="form-control">
+            <input type="text" required name="task" value="<?php echo $row['name']; ?>" class="form-control">
             </div>
-            <input type="submit" name="send" value="Add Task" class="btn btn-success" >
+            <input type="submit" name="send" value="Update Task" class="btn btn-success" >
         </form>
       </div>
       <div class="modal-footer">
