@@ -9,6 +9,8 @@ $start = ($page > 1 ) ? ($page * $perPage) - $perPage : 0;
 $sql = "select * from tasks limit ".$start.", ".$perPage." ";
 $total = $db->query("select * from tasks")->num_rows;
 
+echo $pages = $total / $perPage;
+
 $rows=$db->query($sql);
 
 ?>

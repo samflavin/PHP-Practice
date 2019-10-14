@@ -1,6 +1,6 @@
 <?php
 
-$id = $_GET['id'];
+$id = (int)$_GET['id'];
 
 echo $id;
 

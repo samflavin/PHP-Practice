@@ -2,9 +2,13 @@
 
 <?php include 'db.php';
 
-$sql = "select * from tasks";
+$id= (int)$_GET['id'];
+
+$sql = "select * from tasks where id = '$id' " ;
 
 $rows=$db->query($sql);
+
+$row= $row
 
 ?>
 <html lang="en">
